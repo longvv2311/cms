@@ -13,8 +13,14 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('/');
 
 //get list courses
-//Route::get('courses,'CoursesController@index')->name('courses.index');
 
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('create-user', 'UserController@createUser')->name('create-user');
+Route::post('create-user','UserController@storeUser')->name('store-user');

@@ -4,7 +4,7 @@
 use App\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
-
+use App\Role;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -15,13 +15,14 @@ use Faker\Generator as Faker;
 | model instances for testing / seeding your application's database.
 |
 */
-
-$factory->define(User::class, function (Faker $faker) {
+$roles = Role::pluck('id');
+$factory->define(User::class, function (Faker $faker)use($roles) {
     return [
+        'role_id' => $faker->randomElement($roles),
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'password' => bcrypt('1234567'), // password
         'remember_token' => Str::random(10),
     ];
 });
