@@ -18,9 +18,14 @@ class RoleTableSeeder extends Seeder
                 'name' => 'admin'
             ],
             [
-                'name' => 'user'
-            ]
-
+                'name' => 'trainer'
+            ],
+            [
+                'name' => 'trainningstaff'
+            ],
+            [
+                'name' => 'student'
+            ]      
         ];
         Role::insert($data); // dung` trong mang da chieu
     }

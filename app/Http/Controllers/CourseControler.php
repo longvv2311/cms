@@ -7,7 +7,7 @@ use App\course;
 
 class CourseControler extends Controller
 {
-    public funtion index()
+    public funtion index(),
     {
         //get all resources
         $courses = Course::all();
