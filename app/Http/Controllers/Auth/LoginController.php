@@ -51,4 +51,10 @@ class LoginController extends Controller
     {
         return view('login');
     }
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+        $request->session()->flush();
+        return redirect('/');
+    }
 }

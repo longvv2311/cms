@@ -11,10 +11,35 @@
   </head>
   <body>
     <header>
+      <nav>
+        <ul>
+          
+            @auth
+                <li>
+                  <form action="{{route('logout')}}" method="post">
+                    @csrf
+                  <input type="submit" value="logout">
+                </form>
+                </li>
+            @endauth
+            @guest
+            <li>
+              <a href="{{route('login')}}">login</a>
+            </li>
+            
+            @endguest
+          
+        </ul>
+      </nav>
             <nav class="nav justify-content-center">
               <a class="nav-link active" href="#">Home</a>
-              <a class="nav-link" href="#">List User</a>
-              <a class="nav-link disabled" href="#">Disabled link</a>
+              @auth
+             @if(\Auth::user()->role_id == \App\Role::ADMIN_ROLE) 
+             <a class="nav-link" href="{{route('list-user')}}">List User</a>
+             <a class="nav-link" href="{{route('create-user')}}">Create User</a>
+             @endif
+              @endauth
+
             </nav>
     </header>
     <div class="container">

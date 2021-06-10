@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 })->name('/');
 
 //get list courses
@@ -20,12 +20,16 @@ Route::get('/', function () {
 
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('create-user', 'UserController@createUser')->name('create-user');
-Route::post('create-user','UserController@storeUser')->name('store-user');
+//admin
+
+Route::get('create-user', 'UserController@createUser')->name('create-user')->middleware('is.admin');
+Route::post('create-user','UserController@storeUser')->name('store-user')->middleware('is.admin');
 //list trainer and staff
-Route::get('list-user','Usercontroller@listUser')->name('list-user');
-Route::get('edit-user/{id}', 'UserController@editUser')->name('edit-user');
-Route::put('update-user/{id}', 'UserController@updateUser')->name('user.update');
-Route::delete('delete-user/{id}', 'UserController@deleteUser')->name('delete-user');
+Route::get('list-user','Usercontroller@listUser')->name('list-user')->middleware('is.admin');
+Route::get('edit-user/{id}', 'UserController@editUser')->name('edit-user')->middleware('is.admin');
+Route::put('update-user/{id}', 'UserController@updateUser')->name('user.update')->middleware('is.admin');
+Route::delete('delete-user/{id}', 'UserController@deleteUser')->name('delete-user')->middleware('is.admin');
+//end admin
+
+//staff

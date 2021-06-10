@@ -13,7 +13,14 @@
   <body>
     @if (session()->has('success'))
     <p style="color:green">{{session()->get('success')}}</p>
-@endif
+    @endif
+    <form action="{{route('list-user')}}" method="get">
+      <input type="text" name="search">
+      <input type="submit" value="search">
+
+    </form>
+    
+  
     <table class="table">
         <thead>
           <tr>

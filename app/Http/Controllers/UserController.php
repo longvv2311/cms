@@ -25,8 +25,16 @@ class UserController extends Controller
         User::create($data);
         return 'success';
     }
-    public function listUser()
+    public function listUser(Request $request)
     {
+        if ($request->has('search')) {
+            $users = User::select('id', 'name', 'email')
+                ->where('name', $request->input('search'))
+                ->orWhere('email', $request->input('search'))
+                ->get();
+            //dd($users->toArray());
+            return view('admins.list-user', compact('users'));
+        }
         $users = User::select('id', 'name', 'email')->get();
         //dd($users->toArray());
         return view('admins.list-user', compact('users'));
